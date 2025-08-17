@@ -9,7 +9,15 @@ const withPWA = require('next-pwa')({
 
 const nextConfig: NextConfig = {
   experimental: {
-    optimizePackageImports: ['@heroicons/react']
+    optimizePackageImports: ['@heroicons/react'],
+  },
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
   },
   images: {
     domains: ['treeai.app'],

@@ -12,7 +12,9 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL || "https://mock-convex-url.local");
+const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL || "https://mock-convex-url.local", {
+  skipConvexDeploymentUrlCheck: true
+});
 
 export default function RootLayout({
   children,
