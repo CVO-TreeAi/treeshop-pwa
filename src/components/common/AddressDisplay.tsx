@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { ClipboardIcon, CheckIcon, MapPinIcon, ExternalLinkIcon } from '@heroicons/react/24/outline';
+import { ClipboardIcon, CheckIcon, MapPinIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 import { formatAddressForGPS, type ValidatedAddress } from '@/utils/addressValidation';
 
 interface AddressDisplayProps {
@@ -100,7 +100,7 @@ export function AddressDisplay({
                 className="flex items-center space-x-1 px-2 py-1 text-xs bg-primary text-primary-foreground hover:bg-primary/90 rounded transition-colors"
                 title="Open in maps"
               >
-                <ExternalLinkIcon className="w-3 h-3" />
+                <ArrowTopRightOnSquareIcon className="w-3 h-3" />
                 <span>Maps</span>
               </button>
 

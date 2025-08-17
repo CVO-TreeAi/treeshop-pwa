@@ -13,7 +13,7 @@ import {
   StarIcon,
   ExclamationTriangleIcon,
   ChartBarIcon,
-  TreePineIcon,
+  SparklesIcon,
   CalendarIcon,
   CurrencyDollarIcon
 } from '@heroicons/react/24/outline';
@@ -141,7 +141,7 @@ export function CustomersView() {
           
           <div className="bg-muted/50 p-3 rounded-lg">
             <div className="flex items-center space-x-2">
-              <TreePineIcon className="w-5 h-5 text-emerald-600" />
+              <SparklesIcon className="w-5 h-5 text-emerald-600" />
               <div>
                 <div className="text-lg font-semibold">
                   {customers.reduce((total, c) => total + (c.treeInventory?.length || 0), 0)}

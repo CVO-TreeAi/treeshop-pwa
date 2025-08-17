@@ -9,7 +9,7 @@ import {
   StarIcon,
   ExclamationTriangleIcon,
   ChartBarIcon,
-  TreePineIcon,
+  SparklesIcon,
   CalendarIcon,
   CurrencyDollarIcon,
   ClockIcon,
@@ -157,7 +157,7 @@ export function CustomerCard({ customer }: CustomerCardProps) {
       <div className="px-4 pb-4">
         <div className="grid grid-cols-2 gap-3 text-sm">
           <div className="flex items-center space-x-2">
-            <TreePineIcon className="w-4 h-4 text-emerald-600" />
+            <SparklesIcon className="w-4 h-4 text-emerald-600" />
             <span className="text-muted-foreground">
               {treeCount} trees tracked
             </span>

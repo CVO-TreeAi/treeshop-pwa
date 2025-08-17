@@ -4,13 +4,15 @@ import { useState } from 'react';
 import { useQuery } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
 import { useMockQuery } from '@/hooks/useMockConvex';
-import { PlusIcon, ClockIcon, CheckCircleIcon, PhotoIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, ClockIcon, CheckCircleIcon, PhotoIcon, MapIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
 import { WorkOrderDetailModal } from '@/components/modals/WorkOrderDetailModal';
 import { PhotoGallery } from '@/components/ui/PhotoGallery';
+import { RouteOptimizer } from '@/components/operations/RouteOptimizer';
 
 export function WorkOrdersView() {
   const [statusFilter, setStatusFilter] = useState('all');
   const [selectedWorkOrder, setSelectedWorkOrder] = useState(null);
+  const [showRouteOptimizer, setShowRouteOptimizer] = useState(false);
   
   // Try Convex first, fallback to mock data
   const convexWorkOrders = useQuery(api.workOrders.list);
@@ -39,7 +41,7 @@ export function WorkOrdersView() {
         </div>
 
         {/* Status Filters */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 mb-4">
           {[
             { value: 'all', label: 'All', count: workOrders.length },
             { value: 'pending', label: 'Pending', count: statusCounts.pending || 0 },
@@ -60,7 +62,53 @@ export function WorkOrdersView() {
             </button>
           ))}
         </div>
+
+        {/* Route Optimizer Toggle */}
+        <div className="flex items-center justify-between">
+          <button
+            onClick={() => setShowRouteOptimizer(!showRouteOptimizer)}
+            className="flex items-center space-x-2 text-primary hover:text-primary/80 transition-colors"
+          >
+            <MapIcon className="w-5 h-5" />
+            <span className="font-medium">Route Optimizer</span>
+            {showRouteOptimizer ? (
+              <ChevronUpIcon className="w-4 h-4" />
+            ) : (
+              <ChevronDownIcon className="w-4 h-4" />
+            )}
+          </button>
+          
+          {filteredWorkOrders.length > 0 && (
+            <span className="text-sm text-muted-foreground">
+              {filteredWorkOrders.filter(wo => wo.status !== 'completed').length} jobs available for routing
+            </span>
+          )}
+        </div>
       </div>
+
+      {/* Route Optimizer */}
+      {showRouteOptimizer && (
+        <div className="border-b border-border p-4">
+          <RouteOptimizer
+            workOrders={filteredWorkOrders
+              .filter(wo => wo.status !== 'completed')
+              .map(wo => ({
+                id: wo._id || wo.id,
+                customerName: wo.customerName,
+                address: wo.propertyAddress,
+                services: wo.serviceType ? [wo.serviceType] : ['Tree Service'],
+                priority: wo.priority || 'medium',
+                estimatedDuration: wo.estimatedDuration || 120,
+                status: wo.status,
+                scheduledDate: wo.scheduledDate
+              }))}
+            onOptimizedRoute={(optimizedRoute) => {
+              console.log('Optimized route received:', optimizedRoute);
+              // Here you could update work order scheduling, etc.
+            }}
+          />
+        </div>
+      )}
 
       {/* Work Orders List */}
       <div className="flex-1 overflow-y-auto p-4">
