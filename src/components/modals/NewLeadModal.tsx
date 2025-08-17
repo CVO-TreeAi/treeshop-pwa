@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useMutation } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { AddressInput } from '@/components/common/AddressInput';
+import { SecureAddressInput } from '@/components/common/SecureAddressInput';
 import { validateAddress, type ValidatedAddress } from '@/utils/addressValidation';
 
 interface NewLeadModalProps {
@@ -160,7 +160,7 @@ export function NewLeadModal({ onClose, onSuccess }: NewLeadModalProps) {
             <label className="block text-sm font-medium text-foreground mb-1">
               Property Address *
             </label>
-            <AddressInput
+            <SecureAddressInput
               value={formData.propertyAddress}
               onChange={handleAddressChange}
               placeholder="Start typing address..."
