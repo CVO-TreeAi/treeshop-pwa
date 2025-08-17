@@ -2,6 +2,49 @@ import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
 export default defineSchema({
+  // Customers table - Comprehensive customer intelligence system
+  customers: defineTable({
+    // Basic Information
+    customerName: v.string(),
+    email: v.optional(v.string()),
+    phone: v.optional(v.string()),
+    company: v.optional(v.string()),
+    propertyAddress: v.string(),
+    propertyCoordinates: v.optional(v.object({
+      lat: v.number(),
+      lng: v.number()
+    })),
+    
+    // Intelligence Systems - stored as JSON objects for flexibility
+    propertyIntelligence: v.optional(v.any()),
+    treeInventory: v.optional(v.any()),
+    financialIntelligence: v.optional(v.any()),
+    communicationIntelligence: v.optional(v.any()),
+    serviceHistory: v.optional(v.any()),
+    riskAssessment: v.optional(v.any()),
+    predictiveIntelligence: v.optional(v.any()),
+    relationshipMapping: v.optional(v.any()),
+    aiInsights: v.optional(v.any()),
+    evolutionTracking: v.optional(v.any()),
+    
+    // Status and Tracking
+    status: v.optional(v.string()), // 'active', 'inactive', 'prospective', 'blacklisted'
+    tags: v.optional(v.array(v.string())),
+    priority: v.optional(v.string()), // 'low', 'medium', 'high', 'vip'
+    
+    // System Fields
+    createdAt: v.optional(v.string()),
+    updatedAt: v.optional(v.string()),
+    createdBy: v.optional(v.string()),
+    assignedTo: v.optional(v.string()),
+    isActive: v.optional(v.boolean())
+  })
+  .index("by_address", ["propertyAddress"])
+  .index("by_status", ["status"])
+  .index("by_priority", ["priority"])
+  .index("by_assignedTo", ["assignedTo"])
+  .index("by_customerName", ["customerName"]),
+
   // Leads table - Customer lead management
   leads: defineTable({
     customerName: v.string(),

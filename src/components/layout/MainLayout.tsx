@@ -11,7 +11,8 @@ import {
   SunIcon,
   MoonIcon,
   DocumentChartBarIcon,
-  CalendarIcon
+  CalendarIcon,
+  HomeIcon
 } from '@heroicons/react/24/outline';
 import { 
   UserGroupIcon as UserGroupSolidIcon,
@@ -21,11 +22,13 @@ import {
   DocumentTextIcon as DocumentSolidIcon,
   CogIcon as CogSolidIcon,
   DocumentChartBarIcon as DocumentChartBarSolidIcon,
-  CalendarIcon as CalendarSolidIcon
+  CalendarIcon as CalendarSolidIcon,
+  HomeIcon as HomeSolidIcon
 } from '@heroicons/react/24/solid';
 import { useTheme } from '@/contexts/ThemeContext';
 import { AuthButton } from '@/components/auth/AuthButton';
 import { LeadsView } from '@/components/views/LeadsView';
+import { CustomersView } from '@/components/views/CustomersView';
 import { ProposalsView } from '@/components/views/ProposalsView';
 import { WorkOrdersView } from '@/components/views/WorkOrdersView';
 import { CalendarView } from '@/components/views/CalendarView';
@@ -34,7 +37,7 @@ import { AlexAIView } from '@/components/views/AlexAIView';
 import { InvoicesView } from '@/components/views/InvoicesView';
 import { SettingsView } from '@/components/views/SettingsView';
 
-type TabItem = 'leads' | 'proposals' | 'work-orders' | 'calendar' | 'operations' | 'alex-ai' | 'invoices' | 'settings';
+type TabItem = 'leads' | 'customers' | 'proposals' | 'work-orders' | 'calendar' | 'operations' | 'alex-ai' | 'invoices' | 'settings';
 
 const tabs = [
   {
@@ -42,6 +45,12 @@ const tabs = [
     name: 'Leads',
     icon: UserGroupIcon,
     iconSolid: UserGroupSolidIcon,
+  },
+  {
+    id: 'customers' as TabItem,
+    name: 'Customers',
+    icon: HomeIcon,
+    iconSolid: HomeSolidIcon,
   },
   {
     id: 'proposals' as TabItem,
@@ -95,6 +104,8 @@ export function MainLayout() {
     switch (activeTab) {
       case 'leads':
         return <LeadsView />;
+      case 'customers':
+        return <CustomersView />;
       case 'proposals':
         return <ProposalsView />;
       case 'work-orders':
