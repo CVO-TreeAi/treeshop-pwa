@@ -32,6 +32,13 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+
+# convex
+.convex/
+
+# alex-agent (separate repository)
+alex-agent/
 
 # vercel
 .vercel
